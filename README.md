@@ -308,10 +308,10 @@ module('Acceptance | login', function(hooks) {
       idToken: 1
     };
 
-    await authenticateSession(this.application, sessionData);
+    await authenticateSession(sessionData);
     await visit('/login');
     
-    let session = currentSession(this.application);
+    let session = currentSession();
     let idToken = get(session, 'data.authenticated.idToken');
     assert.equal(idToken, sessionData.idToken);
     assert.equal(currentURL(), '/protected');
@@ -323,7 +323,7 @@ module('Acceptance | login', function(hooks) {
       idToken: 1
     };
 
-    await mockAuth0Lock(this.application, sessionData);
+    await mockAuth0Lock(sessionData);
     await visit('/login');
 
     assert.equal(currentURL(), '/protected');
